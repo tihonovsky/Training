@@ -34,10 +34,5 @@ public class ButtonManager : MonoBehaviour
         
       _paddleController.Joystick.gameObject.SetActive(true);
    }
-   public void LoadStartWindow()
-   {
-      Time.timeScale = 1f;
-        
-      SceneManager.LoadScene("StartWindow");
-   }
+  
 }

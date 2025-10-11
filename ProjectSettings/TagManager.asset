@@ -8,6 +8,8 @@ TagManager:
   - Block
   - LoseBorder
   - LevelBorder
+  - StaticBlock
+  - Paddle
   layers:
   - Default
   - TransparentFX

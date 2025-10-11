@@ -1,7 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-
 
 public class BallController : MonoBehaviour
 {
@@ -11,9 +9,20 @@ public class BallController : MonoBehaviour
     [SerializeField] private float _ballSpeed;
     [SerializeField] private GameObject _loseWindow;
     [SerializeField] private GameObject _victoryWindow;
-    [SerializeField] private TMP_Text _block;
+    [SerializeField] private GameObject[] _blockQuantity;
+    [Space]
+    [SerializeField] private TMP_Text _blockQuantityText;
+    [SerializeField] private TMP_Text _blockText;
+   
     
     private int _blockCounter;
+    private int _blockQuantityCount;
+
+    private void Awake()
+    {
+        _blockQuantityCount = _blockQuantity.Length; 
+        _blockText.text = _blockQuantityCount.ToString();
+    }
 
     private void Start()
     {
@@ -36,8 +45,7 @@ public class BallController : MonoBehaviour
 
             _blockCounter++;
 
-            _block.text = _blockCounter.ToString();
-
+            _blockText.text = _blockCounter.ToString();
         }
 
         if (coll.gameObject.CompareTag("LoseBorder"))
@@ -49,7 +57,7 @@ public class BallController : MonoBehaviour
             _platformControl.Joystick.gameObject.SetActive(false);
         }
 
-        if (_blockCounter == 15)
+        if (_blockText.text == _blockQuantityText.text)
         {
             _victoryWindow.SetActive(true);
 

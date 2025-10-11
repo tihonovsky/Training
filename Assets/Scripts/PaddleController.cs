@@ -5,14 +5,14 @@ public class PaddleController : MonoBehaviour
 {
     [SerializeField] private float _speed = 8f;
     [SerializeField] private BallController _ballControl;
+    [HideInInspector] public float paddleWidth = 250f / 2f;
     
     public JoystickForMovement Joystick;
     public BallController Ball;
 
     private float _inputX;
     private Rigidbody _rb;
-    private const float _borderPosition = 35f;
-
+    
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -24,12 +24,22 @@ public class PaddleController : MonoBehaviour
         {
             _ballControl.BallActivate();
         }
-
+        
         _inputX = Joystick.ReturnVectorDirection().x;
 
         transform.Translate(_inputX * _speed * Time.deltaTime, 0, 0);
+        
+        float screenHeight = Camera.main.orthographicSize * 2f;
+        float screenWidth = screenHeight * Camera.main.aspect;
+        
+        float platformWidthWorld = paddleWidth /100f;
+        float halfPlatformWidthWorld = platformWidthWorld / 2f;
 
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, -2.06f, 2.06f), transform.position.y,
+        float halfScreenWidth = screenWidth / 2f;
+        float minX = -halfScreenWidth + halfPlatformWidthWorld;
+        float maxX = halfScreenWidth - halfPlatformWidthWorld;
+        
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, minX, maxX), transform.position.y,
             transform.position.z);
     }
 
