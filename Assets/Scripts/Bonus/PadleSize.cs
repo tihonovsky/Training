@@ -1,9 +1,22 @@
+using System;
 using UnityEngine;
 
 public class PadleSize : Bonus
-{
-    protected override void ApplyEffect()
+{ 
+    public BonusType SizeType;
+    protected override void ApplyEffect(GameObject target)
     {
-        throw new System.NotImplementedException();
+        PaddleController paddle = target.GetComponent<PaddleController>();
+
+        switch (SizeType)
+        {
+            case BonusType.Increace:
+                paddle.ActivateIncreaceBonus();
+                break;
+            case BonusType.Reduce:
+                paddle.ActivateReduceBonus();
+                break;
+        }
     }
+    
 }

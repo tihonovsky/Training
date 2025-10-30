@@ -679,7 +679,7 @@ MonoBehaviour:
   - {fileID: 119573513}
   - {fileID: 119573513}
   _blockQuantityText: {fileID: 300996278}
-  _blockText: {fileID: 575662606}
+  _blockCounterText: {fileID: 575662606}
 --- !u!1 &162449806
 GameObject:
   m_ObjectHideFlags: 0
@@ -2930,7 +2930,6 @@ MonoBehaviour:
   _ballControl: {fileID: 119573519}
   paddleWidth: 125
   Joystick: {fileID: 1705632099}
-  Ball: {fileID: 119573519}
 --- !u!1 &582151160
 GameObject:
   m_ObjectHideFlags: 0

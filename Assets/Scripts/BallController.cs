@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 
+
 public class BallController : MonoBehaviour
 {
     [HideInInspector] public bool IsActiveBall = false;
@@ -11,17 +12,17 @@ public class BallController : MonoBehaviour
     [SerializeField] private GameObject _victoryWindow;
     [SerializeField] private GameObject[] _blockQuantity;
     [Space]
+    [SerializeField] private TMP_Text _blockCounterText;
     [SerializeField] private TMP_Text _blockQuantityText;
-    [SerializeField] private TMP_Text _blockText;
-   
     
     private int _blockCounter;
     private int _blockQuantityCount;
+   
 
     private void Awake()
     {
         _blockQuantityCount = _blockQuantity.Length; 
-        _blockText.text = _blockQuantityCount.ToString();
+        _blockQuantityText.text = _blockQuantityCount.ToString();
     }
 
     private void Start()
@@ -37,6 +38,8 @@ public class BallController : MonoBehaviour
         _rigitBody.linearVelocity = new Vector2(0, _ballSpeed);
     }
 
+   
+
     public void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.CompareTag("Block"))
@@ -45,7 +48,13 @@ public class BallController : MonoBehaviour
 
             _blockCounter++;
 
-            _blockText.text = _blockCounter.ToString();
+            _blockCounterText.text = _blockCounter.ToString();
+            
+            if (Random.Range(0, 2) == 0)
+            {
+                _platformControl.SpawnBonus();
+            }
+
         }
 
         if (coll.gameObject.CompareTag("LoseBorder"))
@@ -57,7 +66,7 @@ public class BallController : MonoBehaviour
             _platformControl.Joystick.gameObject.SetActive(false);
         }
 
-        if (_blockText.text == _blockQuantityText.text)
+        if (_blockCounterText.text == _blockQuantityText.text)
         {
             _victoryWindow.SetActive(true);
 

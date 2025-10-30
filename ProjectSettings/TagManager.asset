@@ -10,6 +10,7 @@ TagManager:
   - LevelBorder
   - StaticBlock
   - Paddle
+  - Bonus
   layers:
   - Default
   - TransparentFX
@@ -17,9 +18,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Bonus
+  - Ball
+  - Block
   - 
   - 
   - 
