@@ -1,11 +1,9 @@
-using System;
 using UnityEngine;
-using UnityEngine.Experimental.Playables;
 
 public abstract class Bonus : MonoBehaviour
 {
     private float _speed = 5f;
-
+    
     private void Update()
     {
         transform.Translate(Vector2.down * (_speed * Time.deltaTime));
@@ -13,7 +11,7 @@ public abstract class Bonus : MonoBehaviour
     
     public void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Paddle")
+        if (col.gameObject.CompareTag("Paddle"))
         {
             ApplyEffect(col.gameObject);
         }
@@ -24,5 +22,4 @@ public abstract class Bonus : MonoBehaviour
         }
     }
     protected abstract void ApplyEffect(GameObject target);
-    
 }

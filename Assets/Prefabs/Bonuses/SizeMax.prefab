@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3879358687930782223}
   - component: {fileID: 8485416054867374979}
   - component: {fileID: 4473433114902187664}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: SizeMax
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90269f13a833a41468d2eb21e33e3d1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SizeType: 0
 --- !u!61 &7177052715442331517
 BoxCollider2D:
   m_ObjectHideFlags: 0

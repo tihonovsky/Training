@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,7 +9,6 @@ public class PaddleController : MonoBehaviour
     [HideInInspector] public float paddleWidth = 250f / 2f;
     [SerializeField] private float _speed = 8f;
     [SerializeField] private BoxCollider2D _collider2D;
-    [SerializeField] private BallController _ballControl;
     [SerializeField] private GameObject _bonusSizeMax;
     [SerializeField] private GameObject _bonusSizeMin;
     [SerializeField] private GameObject _bonusMultiBall;
@@ -24,9 +22,12 @@ public class PaddleController : MonoBehaviour
     private float _inputX;
     private float _screenHeight;
     private Coroutine _sizeRoutine;
-    
-    
-    
+    private BallController _ballControl;
+  
+    public void SetBall(BallController bc)
+    {
+        _ballControl = bc;
+    }
     private void Awake()
     {
         _camera =  Camera.main;
@@ -36,8 +37,6 @@ public class PaddleController : MonoBehaviour
     {
         _rectTransform = GetComponent<RectTransform>();
         _rb = GetComponent<Rigidbody>();
-        _bonusSizeMax.GetComponent<PadleSize>();
-        
     }
 
     private void Update()
@@ -64,31 +63,31 @@ public class PaddleController : MonoBehaviour
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, minX, maxX), transform.position.y,
             transform.position.z);
     }
+    
 
     public void SetSize(PaddleSizes size)
     {
         switch (size)
         {
-           case PaddleSizes.Max :
-               paddleWidth = (float) size / 2;
-               _rectTransform.sizeDelta = new Vector2((float)size, 50);
-               _collider2D.size = new Vector2((float)size, 50);
-               break;
-           case PaddleSizes.Min :
-               paddleWidth = (float) size / 2;
-               _rectTransform.sizeDelta = new Vector2((float)size, 50);
-               _collider2D.size = new Vector2((float)size, 50);
-               break;
-           case PaddleSizes.Normal :
-               paddleWidth = (float) size / 2;
-               _rectTransform.sizeDelta = new Vector2((float)size, 50);
-               _collider2D.size = new Vector2((float)size, 50);
-               break;
+            case PaddleSizes.Max :
+                paddleWidth = (float) size / 2;
+                _rectTransform.sizeDelta = new Vector2((float)size, 50);
+                _collider2D.size = new Vector2((float)size, 50);
+                break;
+            case PaddleSizes.Min :
+                paddleWidth = (float) size / 2;
+                _rectTransform.sizeDelta = new Vector2((float)size, 50);
+                _collider2D.size = new Vector2((float)size, 50);
+                break;
+            case PaddleSizes.Normal:
+                paddleWidth = (float)size / 2;
+                _rectTransform.sizeDelta = new Vector2((float)size, 50);
+                _collider2D.size = new Vector2((float)size, 50);
+                break;
         }
-        
     }
 
-    public void SpawnBonus()
+    public void SpawnBonus(BallController SourceBall)
     {
         int type = Random.Range(0, 3);
         GameObject prefabToSpawn;
@@ -107,7 +106,18 @@ public class PaddleController : MonoBehaviour
                 return;
         }
 
-        Instantiate(prefabToSpawn, _ballControl.transform.position, Quaternion.identity, _scene.transform);
+        Vector3 spawnPos;
+
+        if (_ballControl != null && _ballControl.gameObject != null)
+        {
+            spawnPos = _ballControl.transform.position;
+        }
+        else
+        {
+            spawnPos = SourceBall.transform.position;
+        }
+
+        Instantiate(prefabToSpawn, spawnPos, Quaternion.identity, _scene.transform);
     }
 
     private void RestartSizeRimer(float duration)

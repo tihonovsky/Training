@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1872627389263975979}
-  - component: {fileID: 8164351215590564212}
+  - component: {fileID: 758020763434881016}
   - component: {fileID: 7177052715442331517}
   - component: {fileID: 3879358687930782223}
   - component: {fileID: 8485416054867374979}
   - component: {fileID: 4473433114902187664}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Multiball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ RectTransform:
   m_AnchoredPosition: {x: 1, y: 1}
   m_SizeDelta: {x: 138.45, y: 70.09}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8164351215590564212
+--- !u!114 &758020763434881016
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
